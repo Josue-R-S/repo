@@ -1,0 +1,112 @@
+body {
+  margin: 0;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+#viewport-container {
+  flex: 1;
+  background: #1a1a1a;
+  overflow: auto;
+}
+#viewport {
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+#viewport > div {
+  text-align: center;
+  max-width: 100%;
+}
+#viewport canvas {
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.75) 0px 5px 15px;
+}
+
+#toolbar {
+  width: 99%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+#izquierda {
+  opacity: 0;
+}
+
+#derecha {
+  position: absolute;
+  right: 0px;
+}
+
+.arrow {
+  --arrow-size: 3em;
+  --arrow-color: rgba(255, 255, 255, 0.25);
+  --arrow-color-hover: rgba(255, 255, 255, 0.75);
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+  width: var(--arrow-size);
+  height: var(--arrow-size);
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    box-sizing: border-box;
+    display: inline-block;
+    width: calc(var(--arrow-size) * 0.7071);
+    height: calc(var(--arrow-size) * 0.7071);
+    border-top: calc(var(--arrow-size) / 5) solid var(--arrow-color);
+    transition: all 150ms ease-in-out;
+  }
+
+  &.left {
+    &::after {
+      left: calc(var(--arrow-size) / 5);
+      border-left: calc(var(--arrow-size) / 5) solid var(--arrow-color);
+      transform-origin: top left;
+      rotate: -45deg;
+    }
+  }
+
+  &.right {
+    &::after {
+      right: calc(var(--arrow-size) / 5);
+      border-right: calc(var(--arrow-size) / 5) solid var(--arrow-color);
+      transform-origin: top right;
+      rotate: 45deg;
+    }
+  }
+}
+
+a {
+  &:hover .arrow {
+    &.left,
+    &.right {
+      &::after {
+        border-color: var(--arrow-color-hover);
+      }
+    }
+  }
+}
